@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <h3>Edit Order's Detail</h3>
+    <a th:href="@{/orders}">Back to Orders</a>
+    <form th:action="@{/orders/update/{id}(id=${order.orderId})}" th:object="${order}" method="post">
+        <div class="form-group">
+            <label for="quantity" class="form-label">Quantity</label>
+            <input type="number" id="quantity" th:field="*{quantity}" class="form-control" required/>
+        </div>
+        <div class="form-group">
+            <label for="productName" class="form-label">Product Name</label>
+            <select id="productName" th:field="*{product.id}" class="form-control" required>
+                <option th:each="p : ${products}" th:value="${p.id}" th:text="${p.name}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="purchaseDate" class="form-label">Purchase Date</label>
+            <input type="datetime-local" id="purchaseDate" th:field="*{orderDate}" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+</div>
+
+</body>
+</html>
