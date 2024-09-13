@@ -1,6 +1,8 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
@@ -10,8 +12,11 @@ public class Orders {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
 
+    @NotNull
     private LocalDateTime orderDate;
 
+    @NotNull(message = "Quantity is required")
+    @Min(value = 1, message = "Quantity must be a positive number")
     private int quantity;
 
     @ManyToOne
